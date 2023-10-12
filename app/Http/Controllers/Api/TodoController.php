@@ -37,22 +37,20 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $status = false;
         $message = '';
 
         $validator = Validator::make($request->all(),[
-            'title' => 'request|max:100|unique:todos',
-            'description' => 'request|max:100'
+            'title' => 'required|max:100|unique:todos',
+            'description' => 'required|max:100'
         ]);
 
         if ($validator->fails()){
-            //
             $status = false;
             $message = $validator->errors();
         }else{
             $status = true;
-            $message = 'Data berhasil ditambah';
+            $message = 'Data ini berhasil ditambah';
 
             $todo = new Todo();
             $todo->title = $request->title;
