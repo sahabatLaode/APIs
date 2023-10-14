@@ -16,7 +16,22 @@ class TodoController extends Controller
      */
     public function index()
     {
-        //
+        $todos = Todo::all();
+
+        if ($todos->count() > 0){
+            //
+            return response()->json([
+                'status' => true,
+                'data' => $todos
+            ],200);
+        }else{
+            //
+            return response()->json([
+                'status' => false,
+                'message' => 'data todo tidak ada'
+            ],404);
+        }
+
     }
 
     /**
@@ -43,11 +58,21 @@ class TodoController extends Controller
         $validator = Validator::make($request->all(),[
             'title' => 'required|max:100|unique:todos',
             'description' => 'required|max:100'
+        ],[
+            'title.required' => 'Judul todo harus diisi.',
+            'title.max' => 'Judul todo maksimal 100.',
+            'title.unique' => 'Judul todo harus ada.',
+            'description.required' => 'Judul todo harus diisi.',
+            'description.max' => 'Judul todo maksimal 100.'
         ]);
 
         if ($validator->fails()){
             $status = false;
             $message = $validator->errors();
+            return response()->json([
+                'status' => $status,
+                'message' => $message
+            ],400);
         }else{
             $status = true;
             $message = 'Data ini berhasil ditambah';
@@ -56,12 +81,12 @@ class TodoController extends Controller
             $todo->title = $request->title;
             $todo->description = $request->description;
             $todo->save();
+            return response()->json([
+                'status' => $status,
+                'message' => $message
+            ],201);
         }
 
-        return response()->json([
-            'status' => $status,
-            'message' => $message
-        ],201);
     }
 
     /**
@@ -70,9 +95,23 @@ class TodoController extends Controller
      * @param  \App\Models\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function show(Todo $todo)
+    public function show($id)
     {
         //
+        $todo = Todo::find($id);
+        if ($todo != null){
+            //
+            return response()->json([
+                'status' => true,
+                'data' => $todo
+            ],200);
+        }else{
+            //
+            return response()->json([
+                'status' => false,
+                'message' => 'data todo tidak ada'
+            ],404);
+        }
     }
 
     /**
