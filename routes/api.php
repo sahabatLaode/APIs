@@ -15,14 +15,15 @@ use App\Http\Controllers\Api\UserController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('/registrasi', [UserController::class, 'register']);
+Route::post('/login', [UserController::class, 'login']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::middleware('auth:sanctum')->group(function(){
-// });
-Route::apiResource('todos', TodoController::class);
+Route::middleware('auth:sanctum')->group(function(){
+    Route::apiResource('todos', TodoController::class);
+    Route::get('/logout', [UserController::class, 'logout']);
+});
 
-Route::post('/registrasi', [UserController::class, 'register']);
-Route::post('/login', [UserController::class, 'login']);
