@@ -6,6 +6,7 @@ use App\Models\Todo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class TodoController extends Controller
 {
@@ -132,9 +133,44 @@ class TodoController extends Controller
      * @param  \App\Models\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Todo $todo)
+    public function update(Request $request, $id)
     {
         //
+        $validator = Validator::make($request->all(),[
+            'title' => [
+                'required',
+                'max:100',
+                Rule::unique('todos')->ignore($id)
+            ],
+            'description' => [
+                'required',
+                'max:100'
+            ]
+        ],[
+            'title.required' => 'Judul todo harus diisi.',
+            'title.max' => 'Judul todo maksimal 100.',
+            'title.unique' => 'Judul todo harus ada.',
+            'description.required' => 'description todo harus diisi.',
+            'description.max' => 'Judul todo maksimal 100.'
+        ]);
+        if ($validator->fails()){
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()
+            ],400);
+        }else {
+            $todo = Todo::find($id);
+            $todo->title = $request->title;
+            $todo->description = $request->description;
+            // $todo->is_done = $request->is_done;
+            $todo->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Data berhasil diUpdate'
+            ],200);
+
+        }
     }
 
     /**
@@ -143,8 +179,21 @@ class TodoController extends Controller
      * @param  \App\Models\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Todo $todo)
+    public function destroy($id)
     {
         //
+        $todo = Todo::destroy($id);
+
+        if ($todo) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Data Berhasil Dihapus.'
+            ],200);
+        }else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Data Gagal Dihapus.'
+            ],404);
+        }
     }
 }
