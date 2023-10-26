@@ -42,16 +42,17 @@ class BuktiController extends Controller
         //
         $data = $request->validate([
             'photo' => 'required|file|image|mimes:jpg,png,jpeg,gif,svg|max:4048',
-           ]);
-
-           $file = $request->file('photo');
-           $fileName = uniqid(). '.'. $file->getClientOriginalExtension();
-           $file->storeAs('public/photo', $fileName);
-           $data['photo'] = $fileName;
-           
-           Bukti::create($data);
-           return redirect(url('bukti'))->with('success', 'success');
-       }
+        ]);
+        
+        $file = $request->file('photo');
+        $fileName = uniqid(). '.'. $file->getClientOriginalExtension();
+        $file->storeAs('public/photo', $fileName);
+        $data['photo'] = $fileName;
+        
+        $bukti = new Bukti($data);
+        $bukti->save();
+        
+        return redirect(url('bukti'))->with('success', 'success');
     }
 
     /**
