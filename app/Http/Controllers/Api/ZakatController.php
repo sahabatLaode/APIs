@@ -16,7 +16,7 @@ class ZakatController extends Controller
      */
     public function index()
     {
-        //$zakat = Zakat::all();
+        $zakat = Zakat::all();
 
         if ($zakat->count() > 0){
             //

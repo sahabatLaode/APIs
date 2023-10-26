@@ -17,6 +17,7 @@ class rekController extends Controller
     public function index()
     {
         //
+        $rekening = Rekening::all();
         if ($rekening->count() > 0){
             //
             return response()->json([
@@ -93,7 +94,7 @@ class rekController extends Controller
     public function show($id)
     {
         //
-        $rekening = Todo::find($id);
+        $rekening = Rekening::find($id);
         if ($rekening != null){
             //
             return response()->json([
@@ -109,37 +110,4 @@ class rekController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Zakat  $zakat
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Zakat $zakat)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Zakat  $zakat
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Zakat $zakat)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Zakat  $zakat
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Zakat $zakat)
-    {
-        //
-    }
 }
