@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\TodoController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\ZakatController;
+use App\Http\Controllers\Api\rekController;
+use App\Http\Controllers\Api\BuktiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +20,9 @@ use App\Http\Controllers\Api\UserController;
 */
 Route::post('/registrasi', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
+
 Route::apiResource('todos', TodoController::class);
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -26,4 +31,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function(){
     Route::get('/logout', [UserController::class, 'logout']);
 });
+Route::post('zakat', [ZakatController::class, 'store'])->name('zakat.store');
+Route::post('rekening', [rekController::class, 'store'])->name('rekening.store');
+Route::post('bukti', [buktiController::class, 'store'])->name('bukti.store');
 
