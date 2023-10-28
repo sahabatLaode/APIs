@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ZakatController;
 use App\Http\Controllers\Api\rekController;
 use App\Http\Controllers\Api\BuktiController;
+use App\Http\Controllers\Api\SedekahController;
+use App\Http\Controllers\Api\InfaqController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +35,6 @@ Route::middleware('auth:sanctum')->group(function(){
 Route::post('zakat', [ZakatController::class, 'store'])->name('zakat.store');
 Route::post('rekening', [rekController::class, 'store'])->name('rekening.store');
 Route::post('bukti', [buktiController::class, 'store'])->name('bukti.store');
+Route::post('sedekah', [SedekahController::class, 'store'])->name('sedekah.store');
+Route::post('infaq', [InfaqController::class, 'store'])->name('infaq.store');
 

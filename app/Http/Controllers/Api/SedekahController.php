@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Bukti;
+use App\Models\Sedekah;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Storage;
 
-class BuktiController extends Controller
+class SedekahController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,7 +26,7 @@ class BuktiController extends Controller
     public function create()
     {
         //
-        return view('bukti.create');
+        return view('sedekah.create');
     }
 
     /**
@@ -41,27 +39,27 @@ class BuktiController extends Controller
     {
         //
         $data = $request->validate([
-            'zakat' => 'required|file|image|mimes:jpg,png,jpeg,gif,svg|max:4048',
+            'sedekah' => 'required|file|image|mimes:jpg,png,jpeg,gif,svg|max:4048',
         ]);
         
-        $file = $request->file('zakat');
+        $file = $request->file('sedekah');
         $fileName = uniqid(). '.'. $file->getClientOriginalExtension();
-        $file->storeAs('public/zakat', $fileName);
-        $data['zakat'] = $fileName;
+        $file->storeAs('public/sedekah', $fileName);
+        $data['sedekah'] = $fileName;
         
-        $bukti = new Bukti($data);
-        $bukti->save();
+        $sedekah = new Sedekah($data);
+        $sedekah->save();
         
-        return redirect(url('zakat'))->with('success', 'success');
+        return redirect(url('sedekah'))->with('success', 'success');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Bukti  $bukti
+     * @param  \App\Models\Sedekah  $sedekah
      * @return \Illuminate\Http\Response
      */
-    public function show(Bukti $photo)
+    public function show(Sedekah $sedekah)
     {
         //
     }
@@ -69,10 +67,10 @@ class BuktiController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Bukti  $bukti
+     * @param  \App\Models\Sedekah  $sedekah
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bukti $photo)
+    public function edit(Sedekah $sedekah)
     {
         //
     }
@@ -81,10 +79,10 @@ class BuktiController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Bukti  $bukti
+     * @param  \App\Models\Sedekah  $sedekah
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bukti $bukti)
+    public function update(Request $request, Sedekah $sedekah)
     {
         //
     }
@@ -92,10 +90,10 @@ class BuktiController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Bukti  $bukti
+     * @param  \App\Models\Sedekah  $sedekah
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bukti $bukti)
+    public function destroy(Sedekah $sedekah)
     {
         //
     }
