@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Zakat extends Model
+class InfaqForm extends Model
 {
     use HasFactory;
 
@@ -15,6 +15,6 @@ class Zakat extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'bukti_zakat',
+        'bukti_infaq',
     ];
 }

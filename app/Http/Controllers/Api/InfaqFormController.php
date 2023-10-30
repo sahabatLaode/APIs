@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Zakat;
+use App\Models\InfaqForm;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class ZakatController extends Controller
+class InfaqFormController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +16,14 @@ class ZakatController extends Controller
      */
     public function index()
     {
-        // $zakat = Zakat::all();
+        //
+        // $infaqForm InfaqForm::all();
 
-        // if ($zakat->count() > 0){
+        // if ($infaqForm->count() > 0){
         //     //
         //     return response()->json([
         //         'status' => true,
-        //         'data' => $zakat
+        //         'data' => $infaqForm
         //     ],200);
         // }else{
         //     //
@@ -31,34 +32,18 @@ class ZakatController extends Controller
         //         'message' => 'data zakat tidak ada'
         //     ],404);
         // }
-
     }
-
 
     /**
      * Show the form for creating a new resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
         //
-        $data = $request->validate([
-            'bukti_zakat' => 'required|file|image|mimes:jpg,png,jpeg,gif,svg|max:4048',
-        ]);
         
-        $file = $request->file('bukti_zakat');
-        $fileName = uniqid(). '.'. $file->getClientOriginalExtension();
-        $file->storeAs('public/zakat', $fileName);
-        $data['bukti_zakat'] = $fileName;
-        
-        $zakat = new Zakat($data);
-        $zakat->save();
-        
-        return redirect(url('bukti_zakat'))->with('success', 'success');
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -99,12 +84,13 @@ class ZakatController extends Controller
             $status = true;
             $message = 'Berhasil';
 
-            $zakat = new Zakat();
-            $zakat->nominal = $request->nominal;
-            $zakat->nama = $request->nama;
-            $zakat->email = $request->email;
-            $zakat->phone = $request->phone;
-            $zakat->save();
+            $infaqForm = new InfaqForm();
+            $infaqForm->nominal = $request->nominal;
+            // $infaqForm->rekening = $request->rekening;
+            $infaqForm->nama = $request->nama;
+            $infaqForm->email = $request->email;
+            $infaqForm->phone = $request->phone;
+            $infaqForm->save();
             return response()->json([
                 'status' => $status,
                 'message' => $message
@@ -115,18 +101,18 @@ class ZakatController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Zakat  $zakat
+     * @param  \App\Models\InfaqForm  $infaqForm
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(InfaqForm $infaqForm)
     {
         //
-        $zakat = Zakat::find($id);
-        if ($zakat != null){
+        $infaqForm = InfaqForm::find($id);
+        if ($infaqForm != null){
             //
             return response()->json([
                 'status' => true,
-                'data' => $zakat
+                'data' => $infaqForm
             ],200);
         }else{
             //
@@ -137,4 +123,37 @@ class ZakatController extends Controller
         }
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\InfaqForm  $infaqForm
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(InfaqForm $infaqForm)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\InfaqForm  $infaqForm
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, InfaqForm $infaqForm)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\InfaqForm  $infaqForm
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(InfaqForm $infaqForm)
+    {
+        //
+    }
 }

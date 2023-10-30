@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\rekController;
 use App\Http\Controllers\Api\BuktiController;
 use App\Http\Controllers\Api\SedekahController;
 use App\Http\Controllers\Api\InfaqController;
+use App\Http\Controllers\Api\InfaqFormController;
+use App\Http\Controllers\Api\SedekahFormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,4 +39,6 @@ Route::post('rekening', [rekController::class, 'store'])->name('rekening.store')
 Route::post('bukti', [buktiController::class, 'store'])->name('bukti.store');
 Route::post('sedekah', [SedekahController::class, 'store'])->name('sedekah.store');
 Route::post('infaq', [InfaqController::class, 'store'])->name('infaq.store');
+Route::post('infaqform', [InfaqFormController::class, 'store'])->name('infaqform.store');
+Route::post('sedekahform', [SedekahFormController::class, 'store'])->name('sedekahform.store');
 
