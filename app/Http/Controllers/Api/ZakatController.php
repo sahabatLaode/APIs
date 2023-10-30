@@ -16,21 +16,21 @@ class ZakatController extends Controller
      */
     public function index()
     {
-        // $zakat = Zakat::all();
+        $zakat = Zakat::all();
 
-        // if ($zakat->count() > 0){
-        //     //
-        //     return response()->json([
-        //         'status' => true,
-        //         'data' => $zakat
-        //     ],200);
-        // }else{
-        //     //
-        //     return response()->json([
-        //         'status' => false,
-        //         'message' => 'data zakat tidak ada'
-        //     ],404);
-        // }
+        if ($zakat->count() > 0){
+            //
+            return response()->json([
+                'status' => true,
+                'data' => $zakat
+            ],200);
+        }else{
+            //
+            return response()->json([
+                'status' => false,
+                'message' => 'data zakat tidak ada'
+            ],404);
+        }
 
     }
 
@@ -44,19 +44,19 @@ class ZakatController extends Controller
     public function create(Request $request)
     {
         //
-        $data = $request->validate([
-            'bukti_zakat' => 'required|file|image|mimes:jpg,png,jpeg,gif,svg|max:4048',
-        ]);
+        // $data = $request->validate([
+        //     'bukti_zakat' => 'required|file|image|mimes:jpg,png,jpeg,gif,svg|max:4048',
+        // ]);
         
-        $file = $request->file('bukti_zakat');
-        $fileName = uniqid(). '.'. $file->getClientOriginalExtension();
-        $file->storeAs('public/zakat', $fileName);
-        $data['bukti_zakat'] = $fileName;
+        // $file = $request->file('bukti_zakat');
+        // $fileName = uniqid(). '.'. $file->getClientOriginalExtension();
+        // $file->storeAs('public/zakat', $fileName);
+        // $data['bukti_zakat'] = $fileName;
         
-        $zakat = new Zakat($data);
-        $zakat->save();
+        // $zakat = new Zakat($data);
+        // $zakat->save();
         
-        return redirect(url('bukti_zakat'))->with('success', 'success');
+        // return redirect(url('bukti_zakat'))->with('success', 'success');
     }
 
 
@@ -118,7 +118,7 @@ class ZakatController extends Controller
      * @param  \App\Models\Zakat  $zakat
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $id)
     {
         //
         $zakat = Zakat::find($id);

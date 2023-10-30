@@ -63,8 +63,8 @@ class TodoController extends Controller
             'title.required' => 'Judul todo harus diisi.',
             'title.max' => 'Judul todo maksimal 100.',
             'title.unique' => 'Judul todo harus ada.',
-            'description.required' => 'Judul todo harus diisi.',
-            'description.max' => 'Judul todo maksimal 100.'
+            'description.required' => 'des todo harus diisi.',
+            'description.max' => 'des todo maksimal 100.'
         ]);
 
         if ($validator->fails()){

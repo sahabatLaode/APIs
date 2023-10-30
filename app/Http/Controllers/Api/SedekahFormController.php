@@ -17,21 +17,21 @@ class SedekahFormController extends Controller
     public function index()
     {
         //
-        // $sedekahForm SedekahForm::all();
+        $sedekahForm = SedekahForm::all();
 
-        // if ($sedekahForm->count() > 0){
-        //     //
-        //     return response()->json([
-        //         'status' => true,
-        //         'data' => $sedekahForm
-        //     ],200);
-        // }else{
-        //     //
-        //     return response()->json([
-        //         'status' => false,
-        //         'message' => 'data zakat tidak ada'
-        //     ],404);
-        // }
+        if ($sedekahForm->count() > 0){
+            //
+            return response()->json([
+                'status' => true,
+                'data' => $sedekahForm
+            ],200);
+        }else{
+            //
+            return response()->json([
+                'status' => false,
+                'message' => 'data sedekah tidak ada'
+            ],404);
+        }
     }
 
     /**

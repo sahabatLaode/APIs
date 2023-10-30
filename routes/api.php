@@ -24,21 +24,20 @@ use App\Http\Controllers\Api\SedekahFormController;
 */
 Route::post('/registrasi', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
-;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::middleware('auth:sanctum')->group(function(){
-    Route::apiResource('todos', TodoController::class);
     Route::get('/logout', [UserController::class, 'logout']);
 });
-Route::post('zakat', [ZakatController::class, 'store'])->name('zakat.store');
+Route::apiResource('todos', TodoController::class);
+Route::apiResource('zakat', ZakatController::class);
+Route::apiResource('infaqform', InfaqFormController::class);
+Route::apiResource('sedekahform', SedekahFormController::class);
 Route::post('rekening', [rekController::class, 'store'])->name('rekening.store');
 Route::post('bukti', [buktiController::class, 'store'])->name('bukti.store');
 Route::post('sedekah', [SedekahController::class, 'store'])->name('sedekah.store');
 Route::post('infaq', [InfaqController::class, 'store'])->name('infaq.store');
-Route::post('infaqform', [InfaqFormController::class, 'store'])->name('infaqform.store');
-Route::post('sedekahform', [SedekahFormController::class, 'store'])->name('sedekahform.store');
 

@@ -17,21 +17,21 @@ class InfaqFormController extends Controller
     public function index()
     {
         //
-        // $infaqForm InfaqForm::all();
+        $infaqForm = InfaqForm::all();
 
-        // if ($infaqForm->count() > 0){
-        //     //
-        //     return response()->json([
-        //         'status' => true,
-        //         'data' => $infaqForm
-        //     ],200);
-        // }else{
-        //     //
-        //     return response()->json([
-        //         'status' => false,
-        //         'message' => 'data zakat tidak ada'
-        //     ],404);
-        // }
+        if ($infaqForm->count() > 0){
+            //
+            return response()->json([
+                'status' => true,
+                'data' => $infaqForm
+            ],200);
+        }else{
+            //
+            return response()->json([
+                'status' => false,
+                'message' => 'data infaq tidak ada'
+            ],404);
+        }
     }
 
     /**
