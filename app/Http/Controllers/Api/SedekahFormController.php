@@ -102,7 +102,7 @@ class SedekahFormController extends Controller
      * @param  \App\Models\SedekahForm  $sedekahForm
      * @return \Illuminate\Http\Response
      */
-    public function show(SedekahForm $sedekahForm)
+    public function show(SedekahForm $id)
     {
         //
         $sedekahForm = SedekahForm::find($id);
@@ -116,7 +116,7 @@ class SedekahFormController extends Controller
             //
             return response()->json([
                 'status' => false,
-                'message' => 'data zakat tidak ada'
+                'message' => 'data sedekah tidak ada'
             ],404);
         }
     }

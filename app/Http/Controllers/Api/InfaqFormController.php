@@ -86,7 +86,6 @@ class InfaqFormController extends Controller
 
             $infaqForm = new InfaqForm();
             $infaqForm->nominal = $request->nominal;
-            // $infaqForm->rekening = $request->rekening;
             $infaqForm->nama = $request->nama;
             $infaqForm->email = $request->email;
             $infaqForm->phone = $request->phone;
@@ -104,7 +103,7 @@ class InfaqFormController extends Controller
      * @param  \App\Models\InfaqForm  $infaqForm
      * @return \Illuminate\Http\Response
      */
-    public function show(InfaqForm $infaqForm)
+    public function show(InfaqForm $id)
     {
         //
         $infaqForm = InfaqForm::find($id);
@@ -118,7 +117,7 @@ class InfaqFormController extends Controller
             //
             return response()->json([
                 'status' => false,
-                'message' => 'data zakat tidak ada'
+                'message' => 'data infaq tidak ada'
             ],404);
         }
     }
