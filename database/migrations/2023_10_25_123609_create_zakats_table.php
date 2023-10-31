@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('zakats', function (Blueprint $table) {
             $table->id();
+            $table->string('jenis_donasi', 100);
             $table->string('nominal', 100);
             $table->string('nama', 100);
             $table->string('email', 100);
