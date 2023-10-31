@@ -57,11 +57,15 @@ class SedekahFormController extends Controller
         $message = '';
 
         $validator = Validator::make($request->all(),[
+            'jenis_donasi' => 'required|max:100',
             'nominal' => 'required|max:100',
             'nama' => 'required|max:100',
             'email' => 'required|max:100',
             'phone' => 'required|max:100',
+            'sedekah' => 'required|file|image|mimes:jpg,png,jpeg,gif,svg|max:4048',
         ],[
+            'jenis_donasi.required' => ' harus diisi.',
+            'jenis_donasi.max' => ' maksimal 100.',
             'nominal.required' => 'Nominal harus diisi.',
             'nominal.max' => 'Nominal maksimal 100.',
             'nama.required' => 'Nama harus diisi.',
@@ -70,6 +74,11 @@ class SedekahFormController extends Controller
             'email.max' => 'Email maksimal 100.',
             'phone.required' => 'Phone harus diisi.',
             'phone.max' => 'Phone maksimal 100.',
+            'sedekah.required' => ' harus diisi.',
+            'sedekah.file' => ' format file.',
+            'sedekah.image' => 'format image.',
+            'sedekah.mimes' => 'format mimes.',
+            'sedekah.max' => 'maksimal 4048.',
         ]);
 
         if ($validator->fails()){
@@ -82,8 +91,13 @@ class SedekahFormController extends Controller
         }else{
             $status = true;
             $message = 'Berhasil';
+            $file = $request->file('sedekah');
+            $fileName = uniqid(). '.'. $file->getClientOriginalExtension();
+            $file->storeAs('public/sedekah', $fileName);
+            $data['sedekah'] = $fileName;
 
-            $sedekahForm = new SedekahForm();
+            $sedekahForm = new SedekahForm($data);
+            $sedekahForm->jenis_donasi = $request->jenis_donasi;
             $sedekahForm->nominal = $request->nominal;
             $sedekahForm->nama = $request->nama;
             $sedekahForm->email = $request->email;
