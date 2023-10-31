@@ -78,7 +78,7 @@ class ZakatController extends Controller
             'nama' => 'required|max:100',
             'email' => 'required|max:100',
             'phone' => 'required|max:100',
-            'zakat' => 'required|file|image|mimes:jpg,png,jpeg,gif,svg|max:4048',
+            'fotoZakat' => 'required|file|image|mimes:jpg,png,jpeg,gif,svg|max:4048',
         ],[
             'jenis_donasi.required' => ' harus diisi.',
             'jenis_donasi.max' => ' maksimal 100.',
@@ -90,11 +90,11 @@ class ZakatController extends Controller
             'email.max' => 'Email maksimal 100.',
             'phone.required' => 'Phone harus diisi.',
             'phone.max' => 'Phone maksimal 100.',
-            'zakat.required' => ' harus diisi.',
-            'zakat.file' => ' format file.',
-            'zakat.image' => 'format image.',
-            'zakat.mimes' => 'format mimes.',
-            'zakat.max' => 'maksimal 4048.',
+            'fotoZakat.required' => ' harus diisi.',
+            'fotoZakat.file' => ' format file.',
+            'fotoZakat.image' => 'format image.',
+            'fotoZakat.mimes' => 'format mimes.',
+            'fotoZakat.max' => 'maksimal 4048.',
         ]);
 
         if ($validator->fails()){
@@ -107,10 +107,10 @@ class ZakatController extends Controller
         }else{
             $status = true;
             $message = 'Berhasil';
-            $file = $request->file('zakat');
+            $file = $request->file('fotoZakat');
             $fileName = uniqid(). '.'. $file->getClientOriginalExtension();
-            $file->storeAs('public/zakat', $fileName);
-            $data['zakat'] = $fileName;
+            $file->storeAs('public/fotoZakat', $fileName);
+            $data['fotoZakat'] = $fileName;
 
             $zakat = new Zakat($data);
             $zakat->jenis_donasi = $request->jenis_donasi;

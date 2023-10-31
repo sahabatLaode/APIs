@@ -14,6 +14,6 @@ class Zakat extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'zakat',
+        'fotoZakat',
     ];
 }

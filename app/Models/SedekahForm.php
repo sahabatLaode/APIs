@@ -14,6 +14,6 @@ class SedekahForm extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'sedekah',
+        'fotoSedekah',
     ];
 }

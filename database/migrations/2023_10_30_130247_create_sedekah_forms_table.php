@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('nama', 100);
             $table->string('email', 100);
             $table->string('phone', 100);
-            $table->string('sedekah')->nullable;
+            $table->string('fotoSedekah')->nullable;
             $table->timestamps();
         });
     }

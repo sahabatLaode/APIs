@@ -14,6 +14,6 @@ class InfaqForm extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'infaq',
+        'fotoInfaq',
     ];
 }
