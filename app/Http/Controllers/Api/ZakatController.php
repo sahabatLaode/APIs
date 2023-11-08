@@ -36,31 +36,6 @@ class ZakatController extends Controller
 
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
-        //
-        // $data = $request->validate([
-        //     'bukti_zakat' => 'required|file|image|mimes:jpg,png,jpeg,gif,svg|max:4048',
-        // ]);
-        
-        // $file = $request->file('bukti_zakat');
-        // $fileName = uniqid(). '.'. $file->getClientOriginalExtension();
-        // $file->storeAs('public/zakat', $fileName);
-        // $data['bukti_zakat'] = $fileName;
-        
-        // $zakat = new Zakat($data);
-        // $zakat->save();
-        
-        // return redirect(url('bukti_zakat'))->with('success', 'success');
-    }
-
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -78,7 +53,7 @@ class ZakatController extends Controller
             'nama' => 'required|max:100',
             'email' => 'required|max:100',
             'phone' => 'required|max:100',
-            'fotoZakat' => 'required|file|image|mimes:jpg,png,jpeg,gif,svg|max:4048',
+           
         ],[
             'jenis_donasi.required' => ' harus diisi.',
             'jenis_donasi.max' => ' maksimal 100.',
@@ -91,10 +66,7 @@ class ZakatController extends Controller
             'phone.required' => 'Phone harus diisi.',
             'phone.max' => 'Phone maksimal 100.',
             'fotoZakat.required' => ' harus diisi.',
-            'fotoZakat.file' => ' format file.',
-            'fotoZakat.image' => 'format image.',
-            'fotoZakat.mimes' => 'format mimes.',
-            'fotoZakat.max' => 'maksimal 4048.',
+            
         ]);
 
         if ($validator->fails()){
@@ -107,12 +79,9 @@ class ZakatController extends Controller
         }else{
             $status = true;
             $message = 'Berhasil';
-            $file = $request->file('fotoZakat');
-            $fileName = uniqid(). '.'. $file->getClientOriginalExtension();
-            $file->storeAs('public/fotoZakat', $fileName);
-            $data['fotoZakat'] = $fileName;
+           
 
-            $zakat = new Zakat($data);
+            $zakat = new Zakat();
             $zakat->jenis_donasi = $request->jenis_donasi;
             $zakat->nominal = $request->nominal;
             $zakat->nama = $request->nama;
@@ -149,6 +118,17 @@ class ZakatController extends Controller
                 'message' => 'data zakat tidak ada'
             ],404);
         }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\ZakatForm  $zakatForm
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(ZakatForm $zakatForm)
+    {
+        //
     }
 
 }

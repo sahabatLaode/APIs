@@ -12,6 +12,26 @@ use App\Models\User;
 class UserController extends Controller
 {
     //
+
+    // public function index()
+    // {
+    //     $user = User::all();
+
+    //     if ($user->count() > 0){
+    //         //
+    //         return response()->json([
+    //             'status' => true,
+    //             'data' => $user
+    //         ],200);
+    //     }else{
+    //         //
+    //         return response()->json([
+    //             'status' => false,
+    //             'message' => 'data zakat tidak ada'
+    //         ],404);
+    //     }
+
+    // }
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -56,11 +76,11 @@ class UserController extends Controller
     }
     public function login(Request $request){
         $validator = Validator::make($request->all(),[
-            'username' => ['required', 'email'],
+            'email' => ['required', 'email'],
             'password' => ['required']
         ],[
-            'username.required' => 'Username harus diisi',
-            'username.email' => 'Username menggunakan format email',
+            'email.required' => 'email harus diisi',
+            'email.email' => 'email menggunakan format email',
             'password.required' => 'Password harus diisi',
         ]);
 
@@ -70,7 +90,7 @@ class UserController extends Controller
                 'message' => $validator->errors()
             ],400);
         }else{
-            if (Auth::attempt(['email'=>$request->username, 'password'=>$request->password])){
+            if (Auth::attempt(['email'=>$request->email, 'password'=>$request->password])){
                 $user = Auth::user();
                 $token = $user->createToken('authToken')->plainTextToken;
 
@@ -88,6 +108,26 @@ class UserController extends Controller
             }
         }
     }
+
+    public function show(Request $id)
+    {
+        //
+        $user = User::find($id);
+        if ($user != null){
+            //
+            return response()->json([
+                'status' => true,
+                'data' => $user
+            ],200);
+        }else{
+            //
+            return response()->json([
+                'status' => false,
+                'message' => 'data user tidak ada'
+            ],404);
+        }
+    }
+
 
     public function logout(){
         Auth::user()->tokens()->delete();
