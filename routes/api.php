@@ -20,9 +20,7 @@ use App\Http\Controllers\Api\SedekahFormController;
 */
 Route::post('/registrasi', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
-
-// Route::middleware('auth:api')->get('/user', 'UserController@show');
-
+;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
