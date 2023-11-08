@@ -75,11 +75,11 @@ class driverController extends Controller
     }
     public function login(Request $request){
         $validator = Validator::make($request->all(),[
-            'username' => ['required', 'email'],
+            'email' => ['required', 'email'],
             'password' => ['required']
         ],[
-            'username.required' => 'Username harus diisi',
-            'username.email' => 'Username menggunakan format email',
+            'email.required' => 'email harus diisi',
+            'email.email' => 'email menggunakan format email',
             'password.required' => 'Password harus diisi',
         ]);
 
