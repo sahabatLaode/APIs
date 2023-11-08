@@ -2,25 +2,24 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\driver;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
-class UserController extends Controller
+class driverController extends Controller
 {
-    //
     public function index()
     {
-        $user = User::all();
+        $driver = driver::all();
 
-        if ($user->count() > 0){
+        if ($driver->count() > 0){
             //
             return response()->json([
                 'status' => true,
-                'data' => $user
+                'data' => $driver
             ],200);
         }else{
             //
@@ -60,12 +59,12 @@ class UserController extends Controller
             ],400);
         }else{
             //jika ok, simpan
-            $user = new User();
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->phone = $request->phone;
-            $user->password = Hash::make($request->password);
-            $user->save();
+            $driver = new driver();
+            $driver->name = $request->name;
+            $driver->email = $request->email;
+            $driver->phone = $request->phone;
+            $driver->password = Hash::make($request->password);
+            $driver->save();
 
             return response()->json([
                 'status' => true,
@@ -91,8 +90,8 @@ class UserController extends Controller
             ],400);
         }else{
             if (Auth::attempt(['email'=>$request->username, 'password'=>$request->password])){
-                $user = Auth::user();
-                $token = $user->createToken('authToken')->plainTextToken;
+                $driver = Auth::$driver();
+                $token = $driver->createToken('authToken')->plainTextToken;
 
                 return response()->json([
                     'status' => true,
@@ -112,12 +111,12 @@ class UserController extends Controller
     public function show(Request $id)
     {
         //
-        $user = User::find($id);
-        if ($user != null){
+        $driver = driver::find($id);
+        if ($driver != null){
             //
             return response()->json([
                 'status' => true,
-                'data' => $user
+                'data' => $driver
             ],200);
         }else{
             //
@@ -129,7 +128,7 @@ class UserController extends Controller
     }
 
     public function logout(){
-        Auth::user()->tokens()->delete();
+        Auth::driver()->tokens()->delete();
 
         return response()->json([
             'status' => true,

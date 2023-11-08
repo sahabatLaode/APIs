@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sedekah_forms', function (Blueprint $table) {
+        Schema::create('drivers', function (Blueprint $table) {
             $table->id();
-            $table->string('jenis_donasi', 100);
-            $table->string('nominal', 100);
-            $table->string('nama', 100);
-            $table->string('email', 100);
-            $table->string('phone', 100);
-            // $table->string('fotoSedekah')->nullable;
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('phone');
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sedekah_forms');
+        Schema::dropIfExists('drivers');
     }
 };

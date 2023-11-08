@@ -47,15 +47,15 @@ class ZakatController extends Controller
         // $data = $request->validate([
         //     'bukti_zakat' => 'required|file|image|mimes:jpg,png,jpeg,gif,svg|max:4048',
         // ]);
-        
+
         // $file = $request->file('bukti_zakat');
         // $fileName = uniqid(). '.'. $file->getClientOriginalExtension();
         // $file->storeAs('public/zakat', $fileName);
         // $data['bukti_zakat'] = $fileName;
-        
+
         // $zakat = new Zakat($data);
         // $zakat->save();
-        
+
         // return redirect(url('bukti_zakat'))->with('success', 'success');
     }
 
@@ -78,7 +78,6 @@ class ZakatController extends Controller
             'nama' => 'required|max:100',
             'email' => 'required|max:100',
             'phone' => 'required|max:100',
-            'fotoZakat' => 'required|file|image|mimes:jpg,png,jpeg,gif,svg|max:4048',
         ],[
             'jenis_donasi.required' => ' harus diisi.',
             'jenis_donasi.max' => ' maksimal 100.',
@@ -90,11 +89,6 @@ class ZakatController extends Controller
             'email.max' => 'Email maksimal 100.',
             'phone.required' => 'Phone harus diisi.',
             'phone.max' => 'Phone maksimal 100.',
-            'fotoZakat.required' => ' harus diisi.',
-            'fotoZakat.file' => ' format file.',
-            'fotoZakat.image' => 'format image.',
-            'fotoZakat.mimes' => 'format mimes.',
-            'fotoZakat.max' => 'maksimal 4048.',
         ]);
 
         if ($validator->fails()){
@@ -107,12 +101,8 @@ class ZakatController extends Controller
         }else{
             $status = true;
             $message = 'Berhasil';
-            $file = $request->file('fotoZakat');
-            $fileName = uniqid(). '.'. $file->getClientOriginalExtension();
-            $file->storeAs('public/fotoZakat', $fileName);
-            $data['fotoZakat'] = $fileName;
 
-            $zakat = new Zakat($data);
+            $zakat = new Zakat();
             $zakat->jenis_donasi = $request->jenis_donasi;
             $zakat->nominal = $request->nominal;
             $zakat->nama = $request->nama;

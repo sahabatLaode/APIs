@@ -16,9 +16,11 @@ return new class extends Migration
         Schema::create('permintaan_ambualans', function (Blueprint $table) {
             $table->id();
             $table->string('nama_pasien');
-            $table->string('berat_badan');
-            $table->string('jenis_penyakit');
-            $table->string('waktu_jemput');
+            $table->string('nama_pemesan');
+            $table->int('berat_badan');
+            $table->string('level_darurat');
+            $table->datetime('tanggal');
+            $table->string('pukul');
             $table->geometry('titik_jemput');
             $table->geometry('titik_antar');
             $table->timestamps();

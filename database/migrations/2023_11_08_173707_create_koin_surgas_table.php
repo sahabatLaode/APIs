@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sedekah_forms', function (Blueprint $table) {
+        Schema::create('koin_surgas', function (Blueprint $table) {
             $table->id();
-            $table->string('jenis_donasi', 100);
-            $table->string('nominal', 100);
-            $table->string('nama', 100);
-            $table->string('email', 100);
-            $table->string('phone', 100);
-            // $table->string('fotoSedekah')->nullable;
+            $table->string('catatan');
+            $table->datetime('tanggal');
+            $table->string('jenis_permintaan');
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sedekah_forms');
+        Schema::dropIfExists('koin_surgas');
     }
 };

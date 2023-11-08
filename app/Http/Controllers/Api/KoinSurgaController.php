@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\SedekahForm;
+use App\Models\KoinSurga;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
-class SedekahFormController extends Controller
+class KoinSurgaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,13 +16,13 @@ class SedekahFormController extends Controller
     public function index()
     {
         //
-        $sedekahForm = SedekahForm::all();
+        $koinSurga = KoinSurga::all();
 
-        if ($sedekahForm->count() > 0){
+        if ($koinSurga->count() > 0){
             //
             return response()->json([
                 'status' => true,
-                'data' => $sedekahForm
+                'data' => $koinSurga
             ],200);
         }else{
             //
@@ -57,28 +56,15 @@ class SedekahFormController extends Controller
         $message = '';
 
         $validator = Validator::make($request->all(),[
-            'jenis_donasi' => 'required|max:100',
-            'nominal' => 'required|max:100',
-            'nama' => 'required|max:100',
-            'email' => 'required|max:100',
-            'phone' => 'required|max:100',
+            'catatan' => 'required',
+            'tanggal' => 'required',
+            'jenis_permintaan' => 'required',
+
             // 'fotoSedekah' => 'required|file|image|mimes:jpg,png,jpeg,gif,svg|max:4048',
         ],[
-            'jenis_donasi.required' => ' harus diisi.',
-            'jenis_donasi.max' => ' maksimal 100.',
-            'nominal.required' => 'Nominal harus diisi.',
-            'nominal.max' => 'Nominal maksimal 100.',
-            'nama.required' => 'Nama harus diisi.',
-            'nama.max' => 'Nama maksimal 100.',
-            'email.required' => 'Email harus diisi.',
-            'email.max' => 'Email maksimal 100.',
-            'phone.required' => 'Phone harus diisi.',
-            'phone.max' => 'Phone maksimal 100.',
-            // 'fotosedekah.required' => ' harus diisi.',
-            // 'fotosedekah.file' => ' format file.',
-            // 'fotosedekah.image' => 'format image.',
-            // 'fotosedekah.mimes' => 'format mimes.',
-            // 'fotosedekah.max' => 'maksimal 4048.',
+            'catatan.required' => ' harus diisi.',
+            'tanggal.required' => 'Nominal harus diisi.',
+            'jenis_permintaan.required' => 'Nama harus diisi.',
         ]);
 
         if ($validator->fails()){
@@ -91,18 +77,12 @@ class SedekahFormController extends Controller
         }else{
             $status = true;
             $message = 'Berhasil';
-            // $file = $request->file('fotoSedekah');
-            // $fileName = uniqid(). '.'. $file->getClientOriginalExtension();
-            // $file->storeAs('public/fotoSedekah', $fileName);
-            // $data['fotoSedekah'] = $fileName;
 
-            $sedekahForm = new SedekahForm();
-            $sedekahForm->jenis_donasi = $request->jenis_donasi;
-            $sedekahForm->nominal = $request->nominal;
-            $sedekahForm->nama = $request->nama;
-            $sedekahForm->email = $request->email;
-            $sedekahForm->phone = $request->phone;
-            $sedekahForm->save();
+            $koinSurga = new KoinSurga();
+            $koinSurga->catatan = $request->catatan;
+            $koinSurga->tanggal = $request->tanggal;
+            $koinSurga->jenis_permintaan = $request->jenis_permintaan;
+            $koinSurga->save();
             return response()->json([
                 'status' => $status,
                 'message' => $message
@@ -113,18 +93,18 @@ class SedekahFormController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\SedekahForm  $sedekahForm
+     * @param  \App\Models\KoinSurga  $koinSurga
      * @return \Illuminate\Http\Response
      */
-    public function show(SedekahForm $id)
+    public function show(KoinSurga $koinSurga)
     {
         //
-        $sedekahForm = SedekahForm::find($id);
-        if ($sedekahForm != null){
+        $koinSurga = KoinSurga::find($id);
+        if ($koinSurga != null){
             //
             return response()->json([
                 'status' => true,
-                'data' => $sedekahForm
+                'data' => $koinSurga
             ],200);
         }else{
             //
@@ -138,10 +118,10 @@ class SedekahFormController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\SedekahForm  $sedekahForm
+     * @param  \App\Models\KoinSurga  $koinSurga
      * @return \Illuminate\Http\Response
      */
-    public function edit(SedekahForm $sedekahForm)
+    public function edit(KoinSurga $koinSurga)
     {
         //
     }
@@ -150,10 +130,10 @@ class SedekahFormController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\SedekahForm  $sedekahForm
+     * @param  \App\Models\KoinSurga  $koinSurga
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SedekahForm $sedekahForm)
+    public function update(Request $request, KoinSurga $koinSurga)
     {
         //
     }
@@ -161,10 +141,10 @@ class SedekahFormController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\SedekahForm  $sedekahForm
+     * @param  \App\Models\KoinSurga  $koinSurga
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SedekahForm $sedekahForm)
+    public function destroy(KoinSurga $koinSurga)
     {
         //
     }
