@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\ZakatController;
 use App\Http\Controllers\Api\rekController;
 use App\Http\Controllers\Api\InfaqFormController;
 use App\Http\Controllers\Api\SedekahFormController;
+use App\Http\Controllers\Api\KoinSurgaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,7 @@ Route::apiResource('user', UserController::class);
 Route::apiResource('driver', driverController::class);
 Route::apiResource('infaqform', InfaqFormController::class);
 Route::apiResource('sedekahform', SedekahFormController::class);
+Route::apiResource('koin', KoinSurgaController::class);
 Route::post('rekening', [rekController::class, 'store'])->name('rekening.store');
 
 
