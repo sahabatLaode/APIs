@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\KoinSurga;
+use App\Models\Permintaan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-
-class KoinSurgaController extends Controller
+class PermintaanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,20 +17,18 @@ class KoinSurgaController extends Controller
     public function index()
     {
         //
-        $koinSurga = KoinSurga::all();
+        $permintaan = Permintaan::all();
 
-        if ($koinSurga->count() > 0){
-            //
+        if ($permintaan->count() > 0) {
             return response()->json([
                 'status' => true,
-                'data' => $koinSurga
-            ],200);
-        }else{
-            //
+                'data' => $permintaan
+            ], 200);
+        } else {
             return response()->json([
                 'status' => false,
-                'message' => 'data sedekah tidak ada'
-            ],404);
+                'message' => 'data ambulan tidak ada'
+            ], 404);
         }
     }
 
@@ -54,21 +51,30 @@ class KoinSurgaController extends Controller
     public function store(Request $request)
     {
         //
+
         $status = false;
         $message = '';
 
         $validator = Validator::make($request->all(),[
             'title' => 'required',
-            'catatan' => 'required',
+            'pemesan' => 'required',
+            'pasien' => 'required',
+            'berat' => 'required',
+            'darurat' => 'required',
             'tanggal' => 'required',
-            'jenis_permintaan' => 'required',
+            'pukul' => 'required',
+            'lokasi' => 'required',
 
             // 'fotoSedekah' => 'required|file|image|mimes:jpg,png,jpeg,gif,svg|max:4048',
         ],[
             'title.required' => 'Title harus diisi.',
-            'catatan.required' => 'Catatan harus diisi.',
+            'pemesan.required' => 'Nama pemesan harus diisi.',
+            'pasien.required' => 'Nama pasien harus diisi.',
+            'berat.required' => 'Berat badan harus diisi.',
+            'darurat.required' => 'Level darurat harus diisi.',
             'tanggal.required' => 'Tanggal harus diisi.',
-            'jenis_permintaan.required' => 'Jenis permintaan harus diisi.',
+            'pukul.required' => 'Pukul harus diisi.',
+            'lokasi.required' => 'Lokasi harus diisi.',
         ]);
 
         if ($validator->fails()){
@@ -82,12 +88,16 @@ class KoinSurgaController extends Controller
             $status = true;
             $message = 'Berhasil';
 
-            $koinSurga = new KoinSurga();
-            $koinSurga->title = $request->title;
-            $koinSurga->catatan = $request->catatan;
-            $koinSurga->tanggal = $request->tanggal;
-            $koinSurga->jenis_permintaan = $request->jenis_permintaan;
-            $koinSurga->save();
+            $permintaan = new Permintaan();
+            $permintaan->title = $request->title;
+            $permintaan->pemesan = $request->pemesan;
+            $permintaan->pasien = $request->pasien;
+            $permintaan->berat = $request->berat;
+            $permintaan->darurat = $request->darurat;
+            $permintaan->tanggal = $request->tanggal;
+            $permintaan->pukul = $request->pukul;
+            $permintaan->lokasi = $request->lokasi;
+            $permintaan->save();
             return response()->json([
                 'status' => $status,
                 'message' => $message
@@ -98,24 +108,25 @@ class KoinSurgaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\KoinSurga  $koinSurga
+     * @param  \App\Models\Permintaan  $permintaan
      * @return \Illuminate\Http\Response
      */
-    public function show(KoinSurga $koinSurga)
+    public function show(Permintaan $permintaan)
     {
         //
-        $koinSurga = KoinSurga::find($id);
-        if ($koinSurga != null){
+
+        $permintaan = Permintaan::find($id);
+        if ($permintaan != null){
             //
             return response()->json([
                 'status' => true,
-                'data' => $koinSurga
+                'data' => $permintaan
             ],200);
         }else{
             //
             return response()->json([
                 'status' => false,
-                'message' => 'data sedekah tidak ada'
+                'message' => 'data tidak ada'
             ],404);
         }
     }
@@ -123,10 +134,10 @@ class KoinSurgaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\KoinSurga  $koinSurga
+     * @param  \App\Models\Permintaan  $permintaan
      * @return \Illuminate\Http\Response
      */
-    public function edit(KoinSurga $koinSurga)
+    public function edit(Permintaan $permintaan)
     {
         //
     }
@@ -135,10 +146,10 @@ class KoinSurgaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\KoinSurga  $koinSurga
+     * @param  \App\Models\Permintaan  $permintaan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, KoinSurga $koinSurga)
+    public function update(Request $request, Permintaan $permintaan)
     {
         //
     }
@@ -146,10 +157,10 @@ class KoinSurgaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\KoinSurga  $koinSurga
+     * @param  \App\Models\Permintaan  $permintaan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(KoinSurga $koinSurga)
+    public function destroy(Permintaan $permintaan)
     {
         //
     }

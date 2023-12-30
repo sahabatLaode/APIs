@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('koin_surgas', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
             $table->string('catatan');
-            $table->datetime('tanggal');
+            $table->string('tanggal');
             $table->string('jenis_permintaan');
             $table->timestamps();
         });
