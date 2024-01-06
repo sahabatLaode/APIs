@@ -62,7 +62,11 @@ class SedekahFormController extends Controller
             'nama' => 'required|max:100',
             'email' => 'required|max:100',
             'phone' => 'required|max:100',
+<<<<<<< HEAD
             // 'fotoSedekah' => 'required|file|image|mimes:jpg,png,jpeg,gif,svg|max:4048',
+=======
+          
+>>>>>>> 9a3c2054952480228fcf6f753e4ab878c7b90e33
         ],[
             'jenis_donasi.required' => ' harus diisi.',
             'jenis_donasi.max' => ' maksimal 100.',
@@ -74,11 +78,15 @@ class SedekahFormController extends Controller
             'email.max' => 'Email maksimal 100.',
             'phone.required' => 'Phone harus diisi.',
             'phone.max' => 'Phone maksimal 100.',
+<<<<<<< HEAD
             // 'fotosedekah.required' => ' harus diisi.',
             // 'fotosedekah.file' => ' format file.',
             // 'fotosedekah.image' => 'format image.',
             // 'fotosedekah.mimes' => 'format mimes.',
             // 'fotosedekah.max' => 'maksimal 4048.',
+=======
+            
+>>>>>>> 9a3c2054952480228fcf6f753e4ab878c7b90e33
         ]);
 
         if ($validator->fails()){
@@ -91,10 +99,14 @@ class SedekahFormController extends Controller
         }else{
             $status = true;
             $message = 'Berhasil';
+<<<<<<< HEAD
             // $file = $request->file('fotoSedekah');
             // $fileName = uniqid(). '.'. $file->getClientOriginalExtension();
             // $file->storeAs('public/fotoSedekah', $fileName);
             // $data['fotoSedekah'] = $fileName;
+=======
+            
+>>>>>>> 9a3c2054952480228fcf6f753e4ab878c7b90e33
 
             $sedekahForm = new SedekahForm();
             $sedekahForm->jenis_donasi = $request->jenis_donasi;

@@ -23,12 +23,16 @@ use App\Http\Controllers\Api\KoinSurgaController;
 */
 Route::post('/registrasi', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
+<<<<<<< HEAD
 Route::put('/update-password/{id}', [UserController::class, 'updatePassword']);
 // Route::post('/registrasi1', [driverController::class, 'register']);
 // Route::post('/login1', [driverController::class, 'login']);
 
 Route::put('/user/data/{id}', [UserController::class, 'updateUserData']);
 Route::put('/user/password/{id}', [UserController::class, 'updateUserPassword']);
+=======
+;
+>>>>>>> 9a3c2054952480228fcf6f753e4ab878c7b90e33
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -40,12 +44,18 @@ Route::middleware('auth:sanctum')->group(function(){
 });
 
 Route::apiResource('zakat', ZakatController::class);
+<<<<<<< HEAD
 Route::apiResource('ambulan', PermintaanController::class);
 Route::apiResource('user', UserController::class);
 Route::apiResource('driver', driverController::class);
 Route::apiResource('infaq', InfaqFormController::class);
 Route::apiResource('sedekah', SedekahFormController::class);
 Route::apiResource('koin', KoinSurgaController::class);
+=======
+Route::apiResource('user', UserController::class);
+Route::apiResource('infaq', InfaqFormController::class);
+Route::apiResource('sedekah', SedekahFormController::class);
+>>>>>>> 9a3c2054952480228fcf6f753e4ab878c7b90e33
 Route::post('rekening', [rekController::class, 'store'])->name('rekening.store');
 
 

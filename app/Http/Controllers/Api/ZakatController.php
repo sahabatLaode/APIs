@@ -36,6 +36,7 @@ class ZakatController extends Controller
 
 
     /**
+<<<<<<< HEAD
      * Show the form for creating a new resource.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -61,6 +62,8 @@ class ZakatController extends Controller
 
 
     /**
+=======
+>>>>>>> 9a3c2054952480228fcf6f753e4ab878c7b90e33
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -78,6 +81,10 @@ class ZakatController extends Controller
             'nama' => 'required|max:100',
             'email' => 'required|max:100',
             'phone' => 'required|max:100',
+<<<<<<< HEAD
+=======
+           
+>>>>>>> 9a3c2054952480228fcf6f753e4ab878c7b90e33
         ],[
             'jenis_donasi.required' => ' harus diisi.',
             'jenis_donasi.max' => ' maksimal 100.',
@@ -89,6 +96,11 @@ class ZakatController extends Controller
             'email.max' => 'Email maksimal 100.',
             'phone.required' => 'Phone harus diisi.',
             'phone.max' => 'Phone maksimal 100.',
+<<<<<<< HEAD
+=======
+            'fotoZakat.required' => ' harus diisi.',
+            
+>>>>>>> 9a3c2054952480228fcf6f753e4ab878c7b90e33
         ]);
 
         if ($validator->fails()){
@@ -101,6 +113,10 @@ class ZakatController extends Controller
         }else{
             $status = true;
             $message = 'Berhasil';
+<<<<<<< HEAD
+=======
+           
+>>>>>>> 9a3c2054952480228fcf6f753e4ab878c7b90e33
 
             $zakat = new Zakat();
             $zakat->jenis_donasi = $request->jenis_donasi;
@@ -139,6 +155,17 @@ class ZakatController extends Controller
                 'message' => 'data zakat tidak ada'
             ],404);
         }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\ZakatForm  $zakatForm
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(ZakatForm $zakatForm)
+    {
+        //
     }
 
 }

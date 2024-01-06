@@ -63,7 +63,11 @@ class InfaqFormController extends Controller
             'nama' => 'required|max:100',
             'email' => 'required|max:100',
             'phone' => 'required|max:100',
+<<<<<<< HEAD
             // 'fotoInfaq' => 'required|file|image|mimes:jpg,png,jpeg,gif,svg|max:4048',
+=======
+          
+>>>>>>> 9a3c2054952480228fcf6f753e4ab878c7b90e33
         ],[
             'jenis_donasi.required' => ' harus diisi.',
             'jenis_donasi.max' => ' maksimal 100.',
@@ -75,11 +79,15 @@ class InfaqFormController extends Controller
             'email.max' => 'Email maksimal 100.',
             'phone.required' => 'Phone harus diisi.',
             'phone.max' => 'Phone maksimal 100.',
+<<<<<<< HEAD
             // 'fotoInfaq.required' => ' harus diisi.',
             // 'fotoInfaq.file' => ' format file.',
             // 'fotoInfaq.image' => 'format image.',
             // 'fotoInfaq.mimes' => 'format mimes.',
             // 'fotoInfaq.max' => 'maksimal 4048.',
+=======
+          
+>>>>>>> 9a3c2054952480228fcf6f753e4ab878c7b90e33
         ]);
 
         if ($validator->fails()){
@@ -92,10 +100,14 @@ class InfaqFormController extends Controller
         }else{
             $status = true;
             $message = 'Berhasil';
+<<<<<<< HEAD
             // $file = $request->file('fotoInfaq');
             // $fileName = uniqid(). '.'. $file->getClientOriginalExtension();
             // $file->storeAs('public/fotoInfaq', $fileName);
             // $data['fotoInfaq'] = $fileName;
+=======
+            
+>>>>>>> 9a3c2054952480228fcf6f753e4ab878c7b90e33
 
             $infaqForm = new InfaqForm();
             $infaqForm->jenis_donasi = $request->jenis_donasi;
