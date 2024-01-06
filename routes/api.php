@@ -23,7 +23,6 @@ use App\Http\Controllers\Api\KoinSurgaController;
 */
 Route::post('/registrasi', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
-
 Route::put('/update-password/{id}', [UserController::class, 'updatePassword']);
 // Route::post('/registrasi1', [driverController::class, 'register']);
 // Route::post('/login1', [driverController::class, 'login']);
@@ -41,17 +40,12 @@ Route::middleware('auth:sanctum')->group(function(){
 });
 
 Route::apiResource('zakat', ZakatController::class);
-
 Route::apiResource('ambulan', PermintaanController::class);
 Route::apiResource('user', UserController::class);
 Route::apiResource('driver', driverController::class);
 Route::apiResource('infaq', InfaqFormController::class);
 Route::apiResource('sedekah', SedekahFormController::class);
 Route::apiResource('koin', KoinSurgaController::class);
-
-Route::apiResource('user', UserController::class);
-Route::apiResource('infaq', InfaqFormController::class);
-Route::apiResource('sedekah', SedekahFormController::class);
 Route::post('rekening', [rekController::class, 'store'])->name('rekening.store');
 
 

@@ -12,7 +12,6 @@ use App\Models\User;
 class UserController extends Controller
 {
     //
-<<<<<<< HEAD
     public function index()
     {
         $user = User::all();
@@ -33,28 +32,6 @@ class UserController extends Controller
 
     }
 
-=======
-
-    // public function index()
-    // {
-    //     $user = User::all();
-
-    //     if ($user->count() > 0){
-    //         //
-    //         return response()->json([
-    //             'status' => true,
-    //             'data' => $user
-    //         ],200);
-    //     }else{
-    //         //
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => 'data zakat tidak ada'
-    //         ],404);
-    //     }
-
-    // }
->>>>>>> 9a3c2054952480228fcf6f753e4ab878c7b90e33
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -223,11 +200,7 @@ class UserController extends Controller
                 'status' => false,
                 'message' => $validator->errors()
             ],400);
-<<<<<<< HEAD
         } else {
-=======
-        }else{
->>>>>>> 9a3c2054952480228fcf6f753e4ab878c7b90e33
             if (Auth::attempt(['email'=>$request->email, 'password'=>$request->password])){
                 $user = Auth::user();
                 $token = $user->createToken('authToken')->plainTextToken;
@@ -246,29 +219,16 @@ class UserController extends Controller
         }
     }
 
-<<<<<<< HEAD
     public function getUserData()
     {      
         $user = Auth::user();
 
         if ($user){
-=======
-    public function show(Request $id)
-    {
-        //
-        $user = User::find($id);
-        if ($user != null){
-            //
->>>>>>> 9a3c2054952480228fcf6f753e4ab878c7b90e33
             return response()->json([
                 'status' => true,
                 'data' => $user
             ],200);
         }else{
-<<<<<<< HEAD
-=======
-            //
->>>>>>> 9a3c2054952480228fcf6f753e4ab878c7b90e33
             return response()->json([
                 'status' => false,
                 'message' => 'data user tidak ada'
