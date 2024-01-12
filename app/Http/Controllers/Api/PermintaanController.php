@@ -63,7 +63,8 @@ class PermintaanController extends Controller
             'darurat' => 'required',
             'tanggal' => 'required',
             'pukul' => 'required',
-            'lokasi' => 'required',
+            'lokasiJemput' => 'required',
+            'lokasiAntar' => 'required',
 
             // 'fotoSedekah' => 'required|file|image|mimes:jpg,png,jpeg,gif,svg|max:4048',
         ],[
@@ -74,7 +75,8 @@ class PermintaanController extends Controller
             'darurat.required' => 'Level darurat harus diisi.',
             'tanggal.required' => 'Tanggal harus diisi.',
             'pukul.required' => 'Pukul harus diisi.',
-            'lokasi.required' => 'Lokasi harus diisi.',
+            'lokasiJemput.required' => 'Lokasi harus diisi.',
+            'lokasiAntar.required' => 'Lokasi harus diisi.',
         ]);
 
         if ($validator->fails()){
@@ -96,7 +98,8 @@ class PermintaanController extends Controller
             $permintaan->darurat = $request->darurat;
             $permintaan->tanggal = $request->tanggal;
             $permintaan->pukul = $request->pukul;
-            $permintaan->lokasi = $request->lokasi;
+            $permintaan->lokasiJemput = $request->lokasiJemput;
+            $permintaan->lokasiAntar = $request->lokasiAntar;
             $permintaan->save();
             return response()->json([
                 'status' => $status,

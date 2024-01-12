@@ -61,6 +61,7 @@ class KoinSurgaController extends Controller
             'title' => 'required',
             'catatan' => 'required',
             'tanggal' => 'required',
+            'pukul' => 'required',
             'jenis_permintaan' => 'required',
 
             // 'fotoSedekah' => 'required|file|image|mimes:jpg,png,jpeg,gif,svg|max:4048',
@@ -68,6 +69,7 @@ class KoinSurgaController extends Controller
             'title.required' => 'Title harus diisi.',
             'catatan.required' => 'Catatan harus diisi.',
             'tanggal.required' => 'Tanggal harus diisi.',
+            'pukul.required' => 'Pukul harus diisi.',
             'jenis_permintaan.required' => 'Jenis permintaan harus diisi.',
         ]);
 
@@ -86,6 +88,7 @@ class KoinSurgaController extends Controller
             $koinSurga->title = $request->title;
             $koinSurga->catatan = $request->catatan;
             $koinSurga->tanggal = $request->tanggal;
+            $koinSurga->pukul = $request->pukul;
             $koinSurga->jenis_permintaan = $request->jenis_permintaan;
             $koinSurga->save();
             return response()->json([

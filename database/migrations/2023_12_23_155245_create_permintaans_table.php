@@ -22,7 +22,8 @@ return new class extends Migration
             $table->string('darurat');
             $table->string('tanggal');
             $table->string('pukul');
-            $table->string('lokasi');
+            $table->string('lokasiJemput');
+            $table->string('lokasiAntar');
             $table->timestamps();
         });
     }
