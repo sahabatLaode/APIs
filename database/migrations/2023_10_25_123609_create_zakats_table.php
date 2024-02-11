@@ -16,10 +16,11 @@ return new class extends Migration
         Schema::create('zakats', function (Blueprint $table) {
             $table->id();
             $table->string('jenis_donasi', 100);
-            $table->string('nominal', 100);
+            $table->integer('nominal');
             $table->string('nama', 100);
             $table->string('email', 100);
             $table->string('phone', 100);
+            $table->string('status')->default('pending');
             // $table->string('fotoZakat')->nullable;
             $table->timestamps();
         });

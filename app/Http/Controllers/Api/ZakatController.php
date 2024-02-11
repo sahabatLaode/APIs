@@ -34,32 +34,6 @@ class ZakatController extends Controller
 
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
-        //
-        // $data = $request->validate([
-        //     'bukti_zakat' => 'required|file|image|mimes:jpg,png,jpeg,gif,svg|max:4048',
-        // ]);
-
-        // $file = $request->file('bukti_zakat');
-        // $fileName = uniqid(). '.'. $file->getClientOriginalExtension();
-        // $file->storeAs('public/zakat', $fileName);
-        // $data['bukti_zakat'] = $fileName;
-
-        // $zakat = new Zakat($data);
-        // $zakat->save();
-
-        // return redirect(url('bukti_zakat'))->with('success', 'success');
-    }
-
-
     /**
      * Store a newly created resource in storage.
      *
@@ -74,7 +48,7 @@ class ZakatController extends Controller
 
         $validator = Validator::make($request->all(),[
             'jenis_donasi' => 'required|max:100',
-            'nominal' => 'required|max:100',
+            'nominal' => 'required|numeric',
             'nama' => 'required|max:100',
             'email' => 'required|max:100',
             'phone' => 'required|max:100',
@@ -82,7 +56,7 @@ class ZakatController extends Controller
             'jenis_donasi.required' => ' harus diisi.',
             'jenis_donasi.max' => ' maksimal 100.',
             'nominal.required' => 'Nominal harus diisi.',
-            'nominal.max' => 'Nominal maksimal 100.',
+            'nominal.numeric' => 'Nominal harus berupa angka.',
             'nama.required' => 'Nama harus diisi.',
             'nama.max' => 'Nama maksimal 100.',
             'email.required' => 'Email harus diisi.',
@@ -104,7 +78,7 @@ class ZakatController extends Controller
 
             $zakat = new Zakat();
             $zakat->jenis_donasi = $request->jenis_donasi;
-            $zakat->nominal = $request->nominal;
+            $zakat->nominal = preg_replace('/\D/', '', $request->nominal); // Menghapus semua karakter non-digit
             $zakat->nama = $request->nama;
             $zakat->email = $request->email;
             $zakat->phone = $request->phone;
@@ -140,6 +114,33 @@ class ZakatController extends Controller
             ],404);
         }
     }
+
+    public function getTotalZakat() {
+        $total = Zakat::sum('nominal');
+        
+        if ($total == 0) {
+            return response()->json('Belum ada donasi dilakukan');
+        } else {
+            return response()->json($total);
+        }
+    }
+    
+    public function changeStatus(Request $request)
+    {
+        $requestId = $request->input('request_id');
+        $newStatus = $request->input('new_status');
+
+        $zakat = Zakat::find($requestId);
+        if ($zakat != null) {
+            $zakat->status = $newStatus;
+            $zakat->save();
+
+            return response()->json(['status' => 'success']);
+        } else {
+            return response()->json(['status' => 'error', 'message' => 'Zakat not found']);
+        }
+    }
+    
 
     /**
      * Remove the specified resource from storage.

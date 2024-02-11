@@ -24,6 +24,9 @@ use App\Http\Controllers\Api\KoinSurgaController;
 Route::post('/registrasi', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
 Route::put('/update-password/{id}', [UserController::class, 'updatePassword']);
+Route::get('/total-zakat', [ZakatController::class, 'getTotalZakat']);
+Route::post('/changeStatus', [ZakatController::class, 'changeStatus']);
+
 // Route::post('/registrasi1', [driverController::class, 'register']);
 // Route::post('/login1', [driverController::class, 'login']);
 
